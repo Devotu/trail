@@ -23,10 +23,16 @@ defmodule Trail do
     end
   end
 
+  @doc """
+  Returns the current state of 'id'
+  """
   def recall(id) when is_bitstring(id) do
     State.retrieve(id)
   end
 
+  @doc """
+  Returns all the events leading up to the current state of 'id'
+  """
   def trace(id) when is_bitstring(id) do
     Log.read(id)
   end
