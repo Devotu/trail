@@ -34,4 +34,17 @@ defmodule TrailTest do
     TestHelper.wipe_test(state_id)
   end
 
+  test "state existance" do
+    state_id = "state_three"
+    Trail.store(state_id, @generic_state, @generic_event)
+
+    assert true == Trail.on_record?(state_id)
+    assert true == Trail.has_state?(state_id)
+    assert {:ok} == Trail.clear(state_id)
+    assert true == Trail.on_record?(state_id)
+    assert false == Trail.has_state?(state_id)
+
+    TestHelper.wipe_test(state_id)
+  end
+
 end

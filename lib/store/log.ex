@@ -20,4 +20,10 @@ defmodule Trail.Log do
     |> Store.read_binary_from_path()
     |> Store.parse_delimited_binary(@delimiter)
   end
+
+  def on_record?(id) do
+    id
+    |> path()
+    |> File.exists?()
+  end
 end

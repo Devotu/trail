@@ -5,8 +5,14 @@ defmodule TestHelper do
 
   def wipe_test(id) do
     Store.data_dir() <> "/state/#{id}.state"
-    |> File.rm!()
+    |> wipe_file()
     Store.data_dir() <> "/event/#{id}.log"
-    |> File.rm!()
+    |> wipe_file()
+  end
+
+  defp wipe_file(path) do
+    if File.exists?(path) do
+      File.rm!(path)
+    end
   end
 end

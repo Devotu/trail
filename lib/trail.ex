@@ -30,6 +30,23 @@ defmodule Trail do
     State.retrieve(id)
   end
 
+  def has_state?(id) when is_bitstring(id) do
+    State.has_state?(id)
+  end
+
+  def on_record?(id) when is_bitstring(id) do
+    Log.on_record?(id)
+  end
+
+  @doc """
+  As close to delete as you get. The state of 'id' will be removed
+  but the building events will always remain in order to preserve
+  the entire history of the current state.
+  """
+  def clear(id) when is_bitstring(id) do
+    State.wipe(id)
+  end
+
   @doc """
   Returns all the events leading up to the current state of 'id'
   """
