@@ -8,7 +8,7 @@ defmodule Trail.State do
   def store(id, state) do
     path = path(id)
     bin = :erlang.term_to_binary(state)
-    File.write!(path, bin)
+    File.write(path, bin)
   end
 
   def retrieve(id) do

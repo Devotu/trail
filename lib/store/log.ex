@@ -11,7 +11,7 @@ defmodule Trail.Log do
     path = path(id)
     bin = :erlang.term_to_binary(event)
     del = bin <> @delimiter
-    File.write!(path, del, [:append])
+    File.write(path, del, [:append])
   end
 
   def read(id) do
