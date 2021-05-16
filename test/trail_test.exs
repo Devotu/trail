@@ -45,6 +45,6 @@ defmodule TrailTest do
     assert false == Trail.has_state?(state_id)
 
     TestHelper.wipe_test(state_id)
+    assert false == Trail.on_record?(state_id)
   end
-
 end
