@@ -3,9 +3,8 @@ defmodule Trail.Log do
 
   alias Trail.Store
 
-  defp event_dir(), do: Store.data_dir() <> "/event"
   defp event_path(id) do
-    event_dir() <> "/#{id}.log"
+    Store.data_dir() <> "/event/#{id}.log"
   end
 
   def log(id, event) do
