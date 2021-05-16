@@ -1,18 +1,17 @@
 defmodule Trail do
   @moduledoc """
-  Documentation for `Trail`.
+  Stores a state together with its building events
   """
 
-  @doc """
-  Hello world.
+  def store(id, state, event) when is_bitstring(id) do
 
-  ## Examples
+  end
 
-      iex> Trail.hello()
-      :world
+  def recall(id) when is_bitstring(id) do
 
-  """
-  def hello do
-    :world
+  end
+
+  def track(id) when is_bitstring(id) do
+    
   end
 end
