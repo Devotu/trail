@@ -14,7 +14,7 @@ defmodule Trail.State do
   def retrieve(id) do
     id
     |> path()
-    |> File.read!()
-    |> :erlang.binary_to_term()
+    |> Store.read_binary_from_path()
+    |> Store.parse_binary()
   end
 end

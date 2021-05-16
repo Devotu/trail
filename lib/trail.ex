@@ -26,6 +26,6 @@ defmodule Trail do
   end
 
   def track(id) when is_bitstring(id) do
-
+    Log.read(id)
   end
 end

@@ -3,14 +3,21 @@ defmodule Trail.Log do
 
   alias Trail.Store
 
-  defp event_path(id) do
+  defp path(id) do
     Store.data_dir() <> "/event/#{id}.log"
   end
 
   def log(id, event) do
-    path = event_path(id)
+    path = path(id)
     bin = :erlang.term_to_binary(event)
     del = bin <> @delimiter
     File.write!(path, del, [:append])
+  end
+
+  def read(id) do
+    id
+    |> path()
+    |> Store.read_binary_from_path()
+    |> Store.parse_delimited_binary(@delimiter)
   end
 end
