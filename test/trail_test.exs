@@ -2,6 +2,8 @@ defmodule TrailTest do
   use ExUnit.Case
   doctest Trail
 
+  alias TestHelper
+
   @generic_state %{key: "value", list: ["a", "b"]}
   @generic_event %{id: "e0", input: "this came from somewhere else"}
 
@@ -10,6 +12,7 @@ defmodule TrailTest do
     assert {:ok} == Trail.store(state_id, @generic_state, @generic_event)
     assert @generic_state == Trail.recall(state_id)
     assert Trail.trace(state_id) |> is_list()
+    TestHelper.wipe_test(state_id)
   end
 
   test "store and retrieve long trail" do
@@ -27,6 +30,8 @@ defmodule TrailTest do
     assert "e1" == e1.id
     assert "e2" == e2.id
     assert "e3" == e3.id
+
+    TestHelper.wipe_test(state_id)
   end
 
 end
