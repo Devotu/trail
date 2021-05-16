@@ -47,4 +47,28 @@ defmodule TrailTest do
     TestHelper.wipe_test(state_id)
     assert false == Trail.on_record?(state_id)
   end
+
+  @doc """
+  Tests a very specific problem encountered while the delmiter was a double **
+  Inherited from Metr
+  """
+  test "delimiter mixup" do
+    state_id = "state_four"
+
+    # Becomes <<131, 98, 95, 192, 31, 42>> when turned into binary
+    # <<42>> is same as first of log delimiter and this should not be a problem
+    specific_time = 1_606_426_410
+    specific_event = %{id: "state_delimiter_mixup", time: specific_time}
+
+    Trail.store(state_id, %{}, %{keys: [:correct], data: "first"})
+    Trail.store(state_id, %{}, specific_event)
+    Trail.store(state_id, %{}, %{keys: [:correct], data: "second"})
+    Trail.store(state_id, %{}, %{keys: [:correct], data: "third"})
+
+    entries = Trail.trace(state_id)
+    assert 4 == Enum.count(entries)
+
+    TestHelper.wipe_test(state_id)
+    assert false == Trail.on_record?(state_id)
+  end
 end
