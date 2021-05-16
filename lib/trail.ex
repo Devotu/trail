@@ -22,7 +22,7 @@ defmodule Trail do
   end
 
   def recall(id) when is_bitstring(id) do
-
+    State.retrieve(id)
   end
 
   def track(id) when is_bitstring(id) do
