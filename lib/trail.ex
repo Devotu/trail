@@ -1,6 +1,8 @@
 defmodule Trail do
   @moduledoc """
   Stores a state together with its building events
+  requries a base directory "data" in current working directory
+  with two sub directories "state" and "event"
   """
 
   alias Trail.State
