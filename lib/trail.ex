@@ -25,7 +25,7 @@ defmodule Trail do
     State.retrieve(id)
   end
 
-  def track(id) when is_bitstring(id) do
+  def trace(id) when is_bitstring(id) do
     Log.read(id)
   end
 end

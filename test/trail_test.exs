@@ -8,6 +8,8 @@ defmodule TrailTest do
     event = %{id: "t1", input: "this came from somewhere else"}
     assert {:ok} == Trail.store(state_id, state, event)
     assert state == Trail.recall(state_id)
-    assert Trail.track(state_id) |> is_list()
+    assert Trail.trace(state_id) |> is_list()
   end
+
+
 end
