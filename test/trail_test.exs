@@ -71,4 +71,23 @@ defmodule TrailTest do
     TestHelper.wipe_test(state_id)
     assert false == Trail.on_record?(state_id)
   end
+
+  test "list current ids of type" do
+    term = "Item"
+
+    states = [term <> "_01", term <> "_02", "Thing" <> "_02", "third" <> term]
+    [s1, s2, _s3, s4] = states
+
+    states
+    |> Enum.each(fn s -> Trail.store(s, @generic_state, @generic_event) end)
+
+    listed_states = Trail.list_contains(term)
+
+    assert 3 == Enum.count listed_states
+    assert Enum.member?(listed_states, s1)
+    assert Enum.member?(listed_states, s2)
+    assert Enum.member?(listed_states, s4)
+
+    TestHelper.wipe_test(states)
+  end
 end

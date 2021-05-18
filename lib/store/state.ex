@@ -2,8 +2,14 @@ defmodule Trail.State do
   alias Trail.Store
   alias Trail.Helpers
 
+  @postfix ".state"
+
   defp path(id) do
-    Store.data_dir() <> "/state/#{id}.state"
+    Store.data_dir() <> "/state/#{id}#{@postfix}"
+  end
+
+  defp path() do
+    Store.data_dir() <> "/state/"
   end
 
   def store(id, state) do
@@ -30,5 +36,13 @@ defmodule Trail.State do
     |> path()
     |> File.rm()
     |> Helpers.enforce_tuple()
+  end
+
+  def list_contains(term) do
+    path()
+    |> File.ls!()
+    |> Enum.map(fn file_path -> String.replace(file_path, path(), "") end)
+    |> Enum.filter(fn name -> String.contains?(name, term) end)
+    |> Enum.map(fn name -> String.replace(name, @postfix, "") end)
   end
 end

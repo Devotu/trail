@@ -34,8 +34,8 @@ defmodule Trail do
     State.has_state?(id)
   end
 
-  def on_record?(id) when is_bitstring(id) do
-    Log.on_record?(id)
+  def list_contains(term) when is_bitstring(term) do
+    State.list_contains(term)
   end
 
   @doc """
@@ -52,5 +52,9 @@ defmodule Trail do
   """
   def trace(id) when is_bitstring(id) do
     Log.read(id)
+  end
+
+  def on_record?(id) when is_bitstring(id) do
+    Log.on_record?(id)
   end
 end
